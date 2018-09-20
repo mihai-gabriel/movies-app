@@ -62,15 +62,17 @@ export default {
         }
       })
         .then(response => {
+          // setting up the authentication variables
           window.localStorage.setItem('authtoken', response.data.token);
           window.localStorage.setItem('user', JSON.stringify(response.data.user));
-          this.$parent.close();
-          this.$router.go();
+          this.$parent.close(); // closing login form modal
+          this.$router.go(); // refreshing the page to update the state
         })
         .catch(error => {
-          alert(error.response.data.non_field_errors);
+          // usually username or password wrong, display the error
+          alert(error.response.data.non_field_errors); // lazy method to display the error (temporary)
           console.error(error);
-          this.isLoading = false;
+          this.isLoading = false; // allow the user to refill the form
         });
     }
   }

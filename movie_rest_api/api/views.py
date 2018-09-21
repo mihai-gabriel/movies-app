@@ -9,5 +9,6 @@ from .serializers import UserSerializer
 
 # Create your views here.
 class HomeAPIView(APIView):
+    permission_classes = ()
     def get(self, request, format=None):
         return Response({ 'success': 'API intialized' }) # quick check if server is set-up

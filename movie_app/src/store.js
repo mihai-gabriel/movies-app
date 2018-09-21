@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isAuth: false,
-    user: {}
+    user: {},
+    loginModalActive: false,
   },
   mutations: {
     changeAuth(state, val) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     updateUser(state, val) {
       state.user = val
+    },
+    showLoginModal(state, val) {
+      state.loginModalActive = val;
     }
   },
   actions: {
@@ -22,6 +26,9 @@ export default new Vuex.Store({
     },
     setUser(context, value) {
       context.commit('updateUser', value);
+    },
+    displayLoginModal(context, value) {
+      context.commit('showLoginModal', value);
     }
   }
 })

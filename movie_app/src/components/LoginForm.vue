@@ -27,7 +27,7 @@
         <b-checkbox>Remember me</b-checkbox>
       </section>
       <footer class="modal-card-foot">
-        <button class="button" type="button" @click="$parent.close()">Close</button>
+        <button class="button" type="button" @click="$store.dispatch('displayLoginModal', false)">Close</button>
         <button class="button is-primary" @click.prevent="login()">Login</button>
       </footer>
       <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
@@ -49,6 +49,13 @@ export default {
   },
   methods: {
     login() {
+      if (this.name == '' || this.password == '') {
+        this.$toast.open({
+          message: 'No input provided',
+          type: 'is-danger'
+        });
+        return null;
+      }
       this.isLoading = true;
       return axios({
         method: 'post',
@@ -65,12 +72,23 @@ export default {
           // setting up the authentication variables
           window.localStorage.setItem('authtoken', response.data.token);
           window.localStorage.setItem('user', JSON.stringify(response.data.user));
-          this.$parent.close(); // closing login form modal
-          this.$router.go(); // refreshing the page to update the state
+          this.$toast.open({
+            duration: 950,
+            message: 'Logged in successfully',
+            type: 'is-success'
+          });
+          window.setTimeout(() => {
+            this.$store.dispatch('displayLoginModal', false); // closing login form modal
+            this.$router.go(); // refreshing the page to update the state
+          }, 1100);
         })
         .catch(error => {
           // usually username or password wrong, display the error
-          alert(error.response.data.non_field_errors); // lazy method to display the error (temporary)
+          const error_message = error.response.data.non_field_errors[0];
+          this.$toast.open({
+            message: error_message,
+            type: 'is-danger'
+          });
           console.error(error);
           this.isLoading = false; // allow the user to refill the form
         });

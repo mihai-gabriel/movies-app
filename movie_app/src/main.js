@@ -12,11 +12,34 @@ Vue.use(Buefy)
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
+  // check if the server is available
+  axios
+    .get('http://localhost:8000/')
+    .catch(error => {
+      Vue.prototype.$toast.open({
+        duration: 2000 * 1000,
+        message: "Unable to fetch data from the server",
+        type: 'is-danger',
+      });
+    })
   // getting authentication proof
   const token = window.localStorage.getItem('authtoken');
   const user = window.localStorage.getItem('user');
+
+
   if (!(user && token)) { // check if authentication proof exists
     store.dispatch('setAuth', false);
+    const check_first_time = window.localStorage.getItem('notFirstTime');
+    if (!to.meta.requiresAuth && !check_first_time) { // if someones click an unauthorized link, 
+      Vue.prototype.$snackbar.open({ // it will stack snackbars without this condition
+        duration: 6000,
+        message: 'To gain full access, please log in',
+        type: 'is-info',
+        actionText: 'OK',
+        position: 'is-bottom-right',
+      });
+      window.localStorage.setItem('notFirstTime', true); // prevent snackbar showing again
+    }
   } else {
     // check if jwt token is still available for every request
     axios
@@ -41,6 +64,15 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!(store.state.isAuth)) {
       // not authenticated, to go first page (temporary)
+      Vue.prototype.$toast.open({
+        duration: 2000,
+        message: "Not authorized. Please, log in",
+        type: 'is-danger',
+        queue: false,
+      });
+      window.setTimeout(() => {
+        store.dispatch('displayLoginModal', true);
+      }, 500);
       next({
         path: '/',
       })

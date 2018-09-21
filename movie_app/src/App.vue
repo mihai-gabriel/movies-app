@@ -35,4 +35,8 @@ export default {
   .fade-enter, .fade-leave-active {
     opacity: 0
   }
+
+  .router-link-exact-active {
+    border-bottom: 2px solid #fff;
+  }
 </style>

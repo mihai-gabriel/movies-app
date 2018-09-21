@@ -3,10 +3,10 @@
     <nav class="navbar is-black">
       <div class="container">
         <div class="navbar-brand">
-          <router-link class="navbar-item" :to="{ name: 'home' }">
+          <a class="navbar-item" href="/">
             <b-icon icon="folder-open" ></b-icon>
             <h2 class="logo-title" v-text="title"></h2>
-          </router-link>
+          </a>
           <div class="navbar-burger burger">
             <span></span>
             <span></span>
@@ -26,18 +26,18 @@
         <div class="navbar-menu">
           <div class="navbar-end">
             <template v-if="isAuth">
-              <router-link class="navbar-item" :to="{name: 'profile'}">
-                <b-icon icon="account-outline"></b-icon>
+              <router-link class="navbar-item" :to="{ name: 'profile' }">
+                <b-icon icon="account-circle"></b-icon>
                 <span class="icon-margin" v-text="user.username"></span>
               </router-link>
               <a class="navbar-item" @click="logout()">
-                <b-icon icon="account-outline"></b-icon>
+                <b-icon icon="logout"></b-icon>
                 <span class="icon-margin">Logout</span>
               </a>
             </template>
             <template v-else>
-              <a class="navbar-item" @click="isComponentModalActive = true" >
-                <b-icon icon="account-outline"></b-icon>
+              <a class="navbar-item" @click="showLoginModal()" >
+                <b-icon icon="login"></b-icon>
                 <span class="icon-margin">Login</span>
               </a>
             </template>
@@ -45,7 +45,7 @@
         </div>
       </div>
     </nav>
-    <b-modal :active.sync="isComponentModalActive" has-modal-card>
+    <b-modal :active.sync="loginModal" has-modal-card>
       <login-form></login-form>
     </b-modal>
   </div>
@@ -73,12 +73,35 @@ export default {
     },
     isAuth() {
       return this.$store.state.isAuth;
+    },
+    loginModal: {
+      get() {
+        return this.$store.state.loginModalActive;
+      },
+      set(newValue) {
+        this.$store.dispatch('displayLoginModal', newValue);
+      }
     }
   },
   methods: {
     logout() {
-      window.localStorage.clear();
-      this.$router.go();
+      window.localStorage.removeItem('authtoken');
+      window.localStorage.removeItem('user');
+      this.$toast.open({
+        duration: 950,
+        message: 'Logged out successfully',
+        type: 'is-info'
+      });
+      window.setTimeout(() => {
+        if (this.$router.currentRoute.name != 'home') {
+          this.$router.push({ name: 'home' }); // going to a page available as guest
+        } else {
+          this.$router.go();
+        }
+      }, 1100);
+    },
+    showLoginModal() {
+      return this.$store.dispatch('displayLoginModal', true);
     }
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="movies">
     <Header
-      title="You can see movies only if you are logged in"
-      subtitle="Yeah, movies, man"
+      title="Movies chapter"
+      subtitle="I mean page"
     />
   </div>
 </template>

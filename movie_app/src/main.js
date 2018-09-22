@@ -77,10 +77,11 @@ router.beforeEach((to, from, next) => {
         queue: false,
       });
       window.setTimeout(() => {
+        store.dispatch('setNextURL', to.fullPath);
         store.dispatch('displayLoginModal', true);
       }, 500);
       next({
-        path: '/',
+        name: 'home'
       })
     } else {
       next()

@@ -34,7 +34,7 @@ export default {
   }
 
   .hero::before {
-    content: url('../assets/header-svg.svg');
+    content: url('../assets/header-vector.svg');
     position: absolute;
     top: 0;
     left: 0;

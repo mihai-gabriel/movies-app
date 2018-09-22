@@ -82,6 +82,10 @@ export default {
           });
           window.setTimeout(() => {
             this.$store.dispatch('displayLoginModal', false); // closing login form modal
+            const nextRoute = this.$store.state.nextURL;
+            if (nextRoute != '') {
+              this.$router.push({ path: nextRoute})
+            }
             this.$router.go(); // refreshing the page to update the state
           }, 1100);
         })

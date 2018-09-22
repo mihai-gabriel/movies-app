@@ -8,6 +8,7 @@ export default new Vuex.Store({
     isAuth: false,
     user: {},
     loginModalActive: false,
+    nextURL: ''
   },
   mutations: {
     changeAuth(state, val) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     showLoginModal(state, val) {
       state.loginModalActive = val;
+    },
+    setNextUrl(state, value) {
+      state.nextURL = value;
     }
   },
   actions: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     },
     displayLoginModal(context, value) {
       context.commit('showLoginModal', value);
+    },
+    setNextURL(context, value) {
+      context.commit('setNextUrl', value);
     },
     logoutUser() {
       window.localStorage.removeItem('authtoken');

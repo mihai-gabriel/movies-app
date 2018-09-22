@@ -4,6 +4,18 @@
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>    
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a href="https://bulma.io/" target="_blank">
+          <img
+            src="https://bulma.io/images/made-with-bulma--white.png"
+            width="304"
+            height="57"
+          />
+        </a>
+
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -34,6 +46,21 @@ export default {
 
   .fade-enter, .fade-leave-active {
     opacity: 0
+  }
+
+  .toast.is-info {
+    background-color: #1f7da8 !important;
+  }
+
+  .footer {
+    background-color: #0c0c0c;
+  }
+
+  .extra-margin-top {
+    margin-top: 2em;
+  }
+  .extra-margin-bottom {
+    margin-bottom: 6em;
   }
 
   /* .router-link-exact-active {

@@ -21,7 +21,6 @@
         <div class="navbar-menu">
           <div class="navbar-start">
             <router-link class="navbar-item" :to="{ name: 'movies' }">
-              <b-icon icon="filmstrip"></b-icon>
               <span class="icon-margin">Movies</span>
             </router-link>
           </div>
@@ -30,18 +29,15 @@
         <div class="navbar-menu">
           <div class="navbar-end">
             <template v-if="isAuth">
-              <router-link class="navbar-item" :to="{ name: 'profile' }">
-                <b-icon icon="account-circle"></b-icon>
+              <router-link class="navbar-item user-profile" :to="{ name: 'profile' }">
                 <span class="icon-margin" v-text="user.username"></span>
               </router-link>
               <a class="navbar-item" @click="logout()">
-                <b-icon icon="logout"></b-icon>
                 <span class="icon-margin">Logout</span>
               </a>
             </template>
             <template v-else>
               <a class="navbar-item" @click="showLoginModal()" >
-                <b-icon icon="login"></b-icon>
                 <span class="icon-margin">Login</span>
               </a>
             </template>
@@ -131,5 +127,6 @@ export default {
   .icon-margin {
     margin: 0 0.3em;
   }
+
 </style>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Header
-      title="Movie app"
+      title="Pseudo About Page"
       subtitle="Don't really care about design"
     />
     <div class="container">
@@ -42,12 +42,7 @@ export default {
 </script>
 
 <style scoped>
-  .extra-margin-top {
-    margin-top: 2em;
-  }
-  .extra-margin-bottom {
-    margin-bottom: 6em;
-  }
+  
   .owl-image {
     opacity: 0.7;
   }

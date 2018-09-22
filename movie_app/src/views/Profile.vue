@@ -4,13 +4,17 @@
       :title="usernameCapitalized + '\'s profile'"
       subtitle="A dream profile page"
     />
-    <div class="container">
-      <div class="columns">
-        <div class="column has-text-centered">
-          Name: {{ user.username }} <br>
-          Email: {{ user.email }} <br> 
-          First Name: {{ user.first_name }} <br>
-          Last Name: {{ user.last_name }} <br>
+    <div class="container extra-margin-bottom">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <h1 class="title">
+            <b-icon icon="account-circle" size="is-medium"></b-icon>
+            {{ user.username }}
+          </h1> 
+          <hr>
+          <p>Email: {{ user.email }}</p>  
+          <p>First Name: {{ user.first_name }}</p> 
+          <p>Last Name: {{ user.last_name }}</p> 
         </div>
       </div>
     </div>

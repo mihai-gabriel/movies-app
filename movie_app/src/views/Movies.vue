@@ -17,14 +17,13 @@
             <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
           </ul>
           <nav
-            v-if="nextPage"
+            v-if="(nextPage || previousPage)"
             class="pagination extra-margin-bottom"
             role="navigation"
             aria-label="pagination"
           >
             <a
               class="pagination-previous"
-              title="This is the first page"
               v-if="previousPage"
               @click="getPage(previousPage)"
             >Previous</a>
@@ -32,7 +31,7 @@
               class="pagination-next"
               v-if="nextPage"
               @click="getPage(nextPage)"
-            >Next page</a>
+            >Next</a>
             <!-- <ul class="pagination-list">
               <li>
                 <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>

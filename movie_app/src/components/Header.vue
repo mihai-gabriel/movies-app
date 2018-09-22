@@ -24,9 +24,20 @@ export default {
     font-family: 'Proza Libre', Verdana, Geneva, Tahoma, sans-serif;
   }
 
-  .oblique-hero {
+  /* .oblique-hero {
     background-color: #34ADFF;
     background-image: -webkit-linear-gradient(150deg, #34ADFF 35%, #4CBFFF 35%);
+  } */
+
+  .hero {
+    background: transparent;
+  }
+
+  .hero::before {
+    content: url('../assets/header-svg.svg');
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .hero-body {

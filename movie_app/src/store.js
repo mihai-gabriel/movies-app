@@ -29,6 +29,11 @@ export default new Vuex.Store({
     },
     displayLoginModal(context, value) {
       context.commit('showLoginModal', value);
+    },
+    logoutUser() {
+      window.localStorage.removeItem('authtoken');
+      window.localStorage.removeItem('user');
+      window.localStorage.removeItem('csrf_token');
     }
   }
 })

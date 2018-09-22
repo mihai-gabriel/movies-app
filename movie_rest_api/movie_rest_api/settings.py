@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import datetime
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -127,6 +128,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# CSRF
+CSRF_USE_SESSIONS = True
+
 # Rest Framework Options
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -140,17 +144,11 @@ REST_FRAMEWORK = {
 }
 
 # CORS
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080',
+)
 
 # JWT
-def custom_jwt_response_payload_handler(token, user=None, request=None):
-    return {
-        'token': token,
-        'user': UserSerializer(user, context={
-            'request': request
-        }).data
-    }
-
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'api.utils.custom_jwt_response_payload_handler',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(weeks=2),

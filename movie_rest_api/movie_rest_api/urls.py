@@ -28,10 +28,15 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # auth
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('', views.HomeAPIView.as_view()),
     path('api/', include(router.urls)),
     path('api/api-token-auth/', obtain_jwt_token),
     path('api/api-token-verify/', verify_jwt_token),
     path('api/api-token-refresh/', refresh_jwt_token),
+
+    # movies
+    path('api/movies/', views.MoviesListAPIView.as_view()),
 ]

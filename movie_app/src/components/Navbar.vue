@@ -3,10 +3,14 @@
     <nav class="navbar is-black">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <b-icon icon="folder-open" ></b-icon>
+          <router-link
+            class="navbar-item"
+            :to="{ name: 'home' }"
+            exact-active-class=""
+          >
+            <b-icon icon="settings"></b-icon>
             <h2 class="logo-title" v-text="title"></h2>
-          </a>
+          </router-link>
           <div class="navbar-burger burger">
             <span></span>
             <span></span>
@@ -79,14 +83,14 @@ export default {
         return this.$store.state.loginModalActive;
       },
       set(newValue) {
-        this.$store.dispatch('displayLoginModal', newValue);
+        this.$store.dispatch('displayLoginModal', newValue); // define the way the value should be
+                                                             // changed
       }
     }
   },
   methods: {
     logout() {
-      window.localStorage.removeItem('authtoken');
-      window.localStorage.removeItem('user');
+      this.$store.dispatch('logoutUser');
       this.$toast.open({
         duration: 950,
         message: 'Logged out successfully',
@@ -111,6 +115,17 @@ export default {
   .logo-title {
     font-family: 'Capriola', Verdana, Geneva, Tahoma, sans-serif;
     margin: 0 0.5em;
+  }
+
+  .navbar {
+    font-family: 'Nanum Gothic', sans-serif !important;
+  }
+  
+  .navbar::before {
+    content: url('../assets/navbar-sub.svg');
+    position: absolute;
+    top: 100%;
+    left: 30%;
   }
 
   .icon-margin {

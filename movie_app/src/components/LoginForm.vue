@@ -24,7 +24,7 @@
           </b-input>
         </b-field>
 
-        <b-checkbox>Remember me</b-checkbox>
+        <b-checkbox v-model="rememberMe">Remember me</b-checkbox>
       </section>
       <footer class="modal-card-foot">
         <button class="button" type="button" @click="$store.dispatch('displayLoginModal', false)">Close</button>
@@ -44,7 +44,8 @@ export default {
     return {
       name: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      rememberMe: false
     }
   },
   methods: {
@@ -72,10 +73,12 @@ export default {
           // setting up the authentication variables
           window.localStorage.setItem('authtoken', response.data.token);
           window.localStorage.setItem('user', JSON.stringify(response.data.user));
+          window.localStorage.setItem('csrf_token', response.data.csrf_token);
           this.$toast.open({
             duration: 950,
             message: 'Logged in successfully',
-            type: 'is-success'
+            type: 'is-success',
+            queue: false,
           });
           window.setTimeout(() => {
             this.$store.dispatch('displayLoginModal', false); // closing login form modal

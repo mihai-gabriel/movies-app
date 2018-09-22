@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar title="/Movie dir/" />
+    <Navbar title="PROJECT TITLE" />
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>    
@@ -36,7 +36,7 @@ export default {
     opacity: 0
   }
 
-  .router-link-exact-active {
+  /* .router-link-exact-active {
     border-bottom: 2px solid #fff;
-  }
+  } */
 </style>

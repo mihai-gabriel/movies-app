@@ -11,11 +11,17 @@ Vue.use(Buefy)
 
 Vue.config.productionTip = false
 
+axios.defaults.headers.post['X-CSRFToken'] = window.localStorage.getItem('csrf_token');
+// axios.defaults.headers.get['Authorization'] = `JWT ${window.localStorage.getItem('token')}`;
+
+
+// Middleware
 router.beforeEach((to, from, next) => {
   // check if the server is available
   axios
     .get('http://localhost:8000/')
     .catch(error => {
+      console.log(error);
       Vue.prototype.$toast.open({
         duration: 2000 * 1000,
         message: "Unable to fetch data from the server",
@@ -53,7 +59,7 @@ router.beforeEach((to, from, next) => {
       })
       .catch(() => {
         // if jwt token expired, logout the user
-        window.localStorage.clear();
+        store.dispatch('logoutUser');
         store.dispatch('setAuth', false);
       })
     // keep user authenticated if everything ran fine

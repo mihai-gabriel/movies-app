@@ -2,12 +2,17 @@
   <div class="profile">
     <Header
       :title="usernameCapitalized + '\'s profile'"
+      subtitle="A dream profile page"
     />
     <div class="container">
-      Name: {{ user.username }} <br>
-      Email: {{ user.email }} <br> 
-      First Name: {{ user.first_name }} <br>
-      Last Name: {{ user.last_name }} <br>
+      <div class="columns">
+        <div class="column has-text-centered">
+          Name: {{ user.username }} <br>
+          Email: {{ user.email }} <br> 
+          First Name: {{ user.first_name }} <br>
+          Last Name: {{ user.last_name }} <br>
+        </div>
+      </div>
     </div>
   </div>
 </template>

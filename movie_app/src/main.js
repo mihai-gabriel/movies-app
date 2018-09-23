@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
     .catch(error => {
       console.log(error);
       Vue.prototype.$toast.open({
-        duration: 2000 * 1000,
+        duration: 2000 * 10,
         message: "Unable to fetch data from the server",
         type: 'is-danger',
       });

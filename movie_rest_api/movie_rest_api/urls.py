@@ -24,19 +24,20 @@ from rest_framework_jwt.views import (
 from api import views
 
 router = routers.DefaultRouter()
+router.register(r'movies', views.MoviesViewSet, 'movies')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.HomeAPIView.as_view()),
     
     # auth
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('', views.HomeAPIView.as_view()),
-    path('api/', include(router.urls)),
     path('api/api-token-auth/', obtain_jwt_token),
     path('api/api-token-verify/', verify_jwt_token),
     path('api/api-token-refresh/', refresh_jwt_token),
 
     # movies
-    path('api/movies/', views.MoviesListAPIView.as_view()),
+    path('api/', include(router.urls)),
+    # path('api/movies/', views.MoviesListAPIView.as_view()),
 ]

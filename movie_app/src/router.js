@@ -26,7 +26,7 @@ export default new Router({
       component: Movies
     },
     {
-      path: '/movie/:id',
+      path: '/movie/:id/',
       name: 'movie',
       component: Movie,
       meta: {

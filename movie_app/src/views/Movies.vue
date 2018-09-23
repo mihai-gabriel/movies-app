@@ -9,7 +9,11 @@
         <div class="column is-half">
           <ul>
             <li v-for="movie in movies" :key="movie.pk">
-              <h1 class="title">{{ movie.title }}</h1>
+              <router-link
+                tag="h1"
+                class="title cursor-pointer"
+                :to="{ name: 'movie', params: { id: movie.pk }}"
+              >{{ movie.title }} </router-link>
               <h2 class="subtitle">{{ movie.author }}</h2> <br>
               <p>{{ movie.description }}</p>
               <hr>
@@ -82,6 +86,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .cursor-pointer {
+    cursor: pointer;
+  }
 </style>

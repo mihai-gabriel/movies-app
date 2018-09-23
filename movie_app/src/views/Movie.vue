@@ -1,5 +1,17 @@
 <template>
   <div class="movie">
+    <section class="hero is-black">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+             <b-icon icon="video" class="icon-large" size="is-large"></b-icon>
+             <h1 class="title">Movie Details</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="container extra-margin-top extra-margin-bottom">
       <div class="columns">
         <div class="column">
@@ -54,5 +66,11 @@ export default {
 </script>
 
 <style>
+  .icon-large .mdi-video::before {
+    font-size: 100px !important;
+  }
 
+  .extra-left-padding {
+    padding-left: 80px;
+  }
 </style>

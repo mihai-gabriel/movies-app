@@ -1,14 +1,14 @@
 <template>
-  <div class="movies" v-cloak>
+  <div class="movies">
     <Header
       title="Movies chapter"
       subtitle="I mean page"
     />
-    <div class="container">
+    <div class="container extra-margin-bottom">
       <div class="columns is-centered">
         <div class="column is-half">
           <ul>
-            <li v-for="movie in movies" :key="movie.id">
+            <li v-for="movie in movies" :key="movie.pk">
               <h1 class="title">{{ movie.title }}</h1>
               <h2 class="subtitle">{{ movie.author }}</h2> <br>
               <p>{{ movie.description }}</p>
@@ -16,31 +16,13 @@
             </li>
             <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
           </ul>
-          <nav
-            v-if="(nextPage || previousPage)"
-            class="pagination extra-margin-bottom"
-            role="navigation"
-            aria-label="pagination"
-          >
-            <a
-              class="pagination-previous"
-              v-if="previousPage"
-              @click="getPage(previousPage)"
-            >Previous</a>
-            <a
-              class="pagination-next"
-              v-if="nextPage"
-              @click="getPage(nextPage)"
-            >Next</a>
-            <!-- <ul class="pagination-list">
-              <li>
-                <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
-              </li>
-              <li>
-                <a class="pagination-link" aria-label="Page 2" aria-current="page">2</a>
-              </li>
-            </ul> -->
-          </nav>
+           <b-pagination
+            :total="total"
+            :current.sync="current"
+            :simple="false"
+            :rounded="false"
+            :per-page="perPage">
+          </b-pagination>
         </div>
       </div>
     </div>
@@ -55,11 +37,9 @@ export default {
   name: 'movies',
   data() {
     return {
-      total: 2,
-      current: 1,
+      total: undefined,
+      current: parseInt(this.$route.params.id),
       perPage: 5,
-      previousPage: null,
-      nextPage: null,
       isLoading: false,
       movies: []
     }
@@ -67,47 +47,33 @@ export default {
   components: {
     Header
   },
+  watch: {
+    current(newValue, oldValue) {
+      this.$router.push({ name: 'movies', params: { id: newValue } });
+      this.fetchMovies();
+    }
+  },
   methods: {
     fetchMovies() {
       const token = window.localStorage.getItem('authtoken');
       this.isLoading = true;
       return axios({
         method: 'get',
-        url: 'http://localhost:8000/api/movies/',
-        headers: {
-          Authorization: `JWT ${token}`,
-        }
+        url: 'http://localhost:8000/api/movies/?page=' + this.current
       })
         .then(response => {
-          this.movies = response.data.results;
           this.total = response.data.count;
-          this.nextPage = response.data.next;
+          this.movies = response.data.results;
           this.isLoading = false;
         })
         .catch(error => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: '404' });
+          }
+          this.isLoading = false;
           console.error(error);
         })
       ;
-    },
-    getPage(URL) {
-      const token = window.localStorage.getItem('authtoken');
-      this.isLoading = true;
-      return axios({
-        method: 'get',
-        url: URL,
-        headers: {
-          Authorization: `JWT ${token}`,
-        }
-      })
-        .then(response => {
-          this.movies = response.data.results;
-          this.nextPage = response.data.next;
-          this.previousPage = response.data.previous;
-          this.isLoading = false
-        })
-        .catch(error => {
-          console.error(error);
-        });
     }
   },
   mounted() {

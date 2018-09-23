@@ -20,7 +20,10 @@
 
         <div class="navbar-menu">
           <div class="navbar-start">
-            <router-link class="navbar-item" :to="{ name: 'movies' }">
+            <router-link
+              class="navbar-item"
+              :to="{ name: 'movies', params: { id: 1 } }"
+            >
               <span class="icon-margin">Movies</span>
             </router-link>
           </div>

@@ -12,4 +12,4 @@ class UserSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('title', 'description', 'published_date', 'author',)
+        fields = ('pk', 'title', 'description', 'published_date', 'author',)

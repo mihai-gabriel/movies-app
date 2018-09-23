@@ -54,7 +54,6 @@ export default {
   watch: {
     current(newValue, oldValue) {
       this.$router.push({ name: 'movies', params: { id: newValue } });
-      this.fetchMovies();
     }
   },
   methods: {
@@ -79,6 +78,10 @@ export default {
         })
       ;
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.fetchMovies();
+    next();
   },
   mounted() {
     this.fetchMovies();

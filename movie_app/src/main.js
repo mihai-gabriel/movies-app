@@ -81,7 +81,10 @@ router.beforeEach((to, from, next) => {
         store.dispatch('displayLoginModal', true);
       }, 500);
       next({
-        name: 'home'
+        name: '403',
+        params: {
+          path_to: to.fullPath,
+        }
       })
     } else {
       next()

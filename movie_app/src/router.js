@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Movies from './views/Movies.vue'
 import Movie from './views/Movie.vue'
 import NotFound from './views/NotFound.vue'
+import Forbidden from './views/Forbidden.vue'
 import Profile from './views/Profile.vue'
 import Register from './views/Register.vue'
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/404',
       name: '404',
       component: NotFound
+    },
+    {
+      path: '/403',
+      name: '403',
+      component: Forbidden,
     },
     {
       path: '/login',

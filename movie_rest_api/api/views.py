@@ -8,9 +8,13 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework import viewsets
 
-from .serializers import UserSerializer, MovieSerializer
+from .serializers import (
+    UserSerializer,
+    MovieSerializer,
+    ReviewSerializer
+)
 from .permissions import OnlyStaffCanPost
-from .models import Movie
+from .models import Movie, Review
 
 # Create your views here.
 class HomeAPIView(APIView):
@@ -25,6 +29,12 @@ class MoviesViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
 
 
+class ReviewsViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    
+
+# old
 class MoviesListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
     queryset = Movie.objects.all()

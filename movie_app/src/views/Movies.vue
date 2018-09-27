@@ -53,12 +53,12 @@ export default {
   },
   watch: {
     current(newValue, oldValue) {
+      console.log(oldValue);
       this.$router.push({ name: 'movies', params: { id: newValue } });
     }
   },
   methods: {
     fetchMovies() {
-      const token = window.localStorage.getItem('authtoken');
       this.isLoading = true;
       return axios({
         method: 'get',

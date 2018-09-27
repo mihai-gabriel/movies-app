@@ -127,6 +127,10 @@ export default {
     left: 30%;
   }
 
+  .navbar-item:hover {
+    background-color: inherit !important;
+  }
+
   .icon-margin {
     margin: 0 0.3em;
   }

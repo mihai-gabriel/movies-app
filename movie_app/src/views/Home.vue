@@ -8,12 +8,16 @@
       <div class="columns is-centered extra-margin-top">
         <div class="column is-two-fifths">
           <Message title="Introducing..." subtitle="A Vue.js Project">
-            This is my first project on which I've been working for some time. I hope you like it.
+            <!-- This is my first project on which I've been working for some time. I hope you like it.
             It is not finished at the time I'm writing this, not even started, but I hope this will
             be a successful project for starters. Don't judge me on it.
             I'm using Buefy(Bulma.io) as CSS framework and Vue as JS framework.
             I will be using django as backend framework.
-            So... Lorem, ipsum dolor sit amet
+            So... Lorem, ipsum dolor sit amet -->
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur,
+            deserunt veritatis. Nobis, dicta numquam culpa molestiae, iure quaerat 
+            consequatur quos tempore ipsum modi voluptatum illum obcaecati ipsam natus 
+            at iusto!
           </Message>
         </div>
         <div class="column is-one-quarter">

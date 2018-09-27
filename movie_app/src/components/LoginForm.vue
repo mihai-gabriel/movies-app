@@ -27,7 +27,11 @@
         <b-checkbox v-model="rememberMe">Remember me</b-checkbox>
       </section>
       <footer class="modal-card-foot">
-        <button class="button" type="button" @click="$store.dispatch('displayLoginModal', false)">Close</button>
+        <button
+          class="button"
+          type="button"
+          @click="$store.dispatch('displayLoginModal', false)"
+        >Close</button>
         <button class="button is-primary" @click.prevent="login()">Login</button>
       </footer>
       <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>

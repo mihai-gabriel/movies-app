@@ -43,6 +43,10 @@
               <a class="navbar-item" @click="showLoginModal()" >
                 <span class="icon-margin">Login</span>
               </a>
+              <router-link
+                :to="{ name: 'register'}"
+                class="navbar-item"
+              >Sign Up</router-link>
             </template>
           </div>
         </div>

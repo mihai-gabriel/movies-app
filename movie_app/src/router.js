@@ -5,6 +5,7 @@ import Movies from './views/Movies.vue'
 import Movie from './views/Movie.vue'
 import NotFound from './views/NotFound.vue'
 import Profile from './views/Profile.vue'
+import Register from './views/Register.vue'
 
 import LoginForm from './components/LoginForm.vue'
 
@@ -50,6 +51,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: LoginForm
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
       path: '*',

@@ -87,12 +87,19 @@ export default {
       movie: {},
       // review data
       review_title: '',
-      review_text: ''
+      review_text: '',
+      newData: false,
     }
   },
   computed: {
     user() {
       return this.$store.state.user;
+    }
+  },
+  watch: {
+    newData(newValue, oldValue) {
+      this.fetchMovie();
+      this.newData = oldValue;
     }
   },
   methods: {
@@ -134,9 +141,11 @@ export default {
       })
         .then(response => {
           this.isLoading = false;
+          this.newData = true;
+          this.review_title = '';
+          this.review_text = '';
           console.log(response);
           
-          this.$forceUpdate();
           this.$toast.open({
             duration: 2000,
             message: "Your reviews has been posted successfully!",

@@ -13,7 +13,10 @@ from .serializers import (
     MovieSerializer,
     ReviewSerializer
 )
-from .permissions import OnlyStaffCanPost
+from .permissions import (
+    OnlyStaffCanPost,
+    OnlyStaffCanGet
+)
 from .models import Movie, Review
 
 # Create your views here.
@@ -32,7 +35,12 @@ class MoviesViewSet(viewsets.ModelViewSet):
 class ReviewsViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    
+
+
+class UsersViewSet(viewsets.ModelViewSet):
+    permission_classes = (OnlyStaffCanGet, AllowAny,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 # old
 class MoviesListAPIView(generics.ListAPIView):

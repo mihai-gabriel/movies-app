@@ -26,6 +26,7 @@ from api import views
 router = routers.DefaultRouter()
 router.register(r'movies', views.MoviesViewSet, 'movies')
 router.register(r'reviews', views.ReviewsViewSet, 'reviews')
+router.register(r'users', views.UsersViewSet, 'users')
 
 
 urlpatterns = [

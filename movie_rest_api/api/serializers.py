@@ -5,6 +5,10 @@ from .models import Movie, Review
 
 
 class UserSerializer(serializers.ModelSerializer):
+    get_absolute_url = serializers.SerializerMethodField(method_name='custom_absolute_url')
+
+    def custom_absolute_url(self, obj):
+        return '/user/{id}/'.format(id=obj.pk)
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -15,7 +19,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('pk', 'username', 'first_name', 'last_name', 'email', 'password',)
+        fields = (
+            'pk',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+            'get_absolute_url',
+        )
         extra_kwargs = {
             'password': {
                 'write_only': True
@@ -28,7 +40,15 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ('pk', 'title', 'user', 'user_username', 'movie', 'timestamp', 'review_text',)
+        fields = (
+            'pk',
+            'title',
+            'user',
+            'user_username',
+            'movie',
+            'timestamp',
+            'review_text',
+        )
 
 
 class MovieSerializer(serializers.ModelSerializer):

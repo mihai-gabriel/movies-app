@@ -1,21 +1,23 @@
 <template>
   <div id="app">
-    <Navbar title="PROJECT TITLE" />
-    <transition name="fade" mode="out-in">
-      <router-view/>
-    </transition>    
-    <footer class="footer">
-      <div class="content has-text-centered">
-        <a href="https://bulma.io/" target="_blank">
-          <img
-            src="https://bulma.io/images/made-with-bulma--white.png"
-            width="304"
-            height="57"
-          />
-        </a>
+    <div v-cloak>
+      <Navbar title="PROJECT TITLE" />
+      <transition name="fade" mode="out-in">
+        <router-view/>
+      </transition>    
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <a href="https://bulma.io/" target="_blank">
+            <img
+              src="https://bulma.io/images/made-with-bulma--white.png"
+              width="304"
+              height="57"
+            />
+          </a>
 
-      </div>
-    </footer>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -33,6 +35,11 @@ export default {
   html {
     overflow-y: auto !important;
   }
+
+  [v-cloak] {
+    display: none;
+  }
+
   body {
     font-family: 'Karla', BlinkMacSystemFont, -apple-system,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",

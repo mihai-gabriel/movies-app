@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import generics
 from rest_framework import status
 from rest_framework import viewsets
@@ -38,9 +38,17 @@ class ReviewsViewSet(viewsets.ModelViewSet):
 
 
 class UsersViewSet(viewsets.ModelViewSet):
-    permission_classes = (OnlyStaffCanGet, AllowAny,)
+    permission_classes = (OnlyStaffCanGet,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_permissions(self):
+        if self.action == 'retrieve':
+            return [IsAuthenticated(),]
+        elif self.action == 'create':
+            return [IsAuthenticated(),]
+        return super(UsersViewSet, self).get_permissions()
+
 
 # old
 class MoviesListAPIView(generics.ListAPIView):

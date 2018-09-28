@@ -32,7 +32,10 @@
         <div class="navbar-menu">
           <div class="navbar-end">
             <template v-if="isAuth">
-              <router-link class="navbar-item user-profile" :to="{ name: 'profile' }">
+              <router-link
+                class="navbar-item user-profile"
+                :to="{ name: 'profile', params: { id: user.pk } }"
+              >
                 <span class="icon-margin" v-text="user.username"></span>
               </router-link>
               <a class="navbar-item" @click="logout()">

@@ -38,7 +38,11 @@
             :key="review.pk"
           >
             <h1 class="title is-size-5" v-text="review.title"></h1>
-            <h2 class="subtitle is-size-6 user_review" v-text="review.user_username"></h2>
+            <router-link
+              tag="h2" class="subtitle is-size-6 user_review"
+              v-text="review.user_username"
+              :to="{ name: 'profile', params: { id: review.user }}"
+            ></router-link>
             <p v-text="review.review_text"></p>
           </div>
           <hr>
@@ -183,5 +187,6 @@ export default {
 
   .user_review {
     color: #0074D9;
+    cursor: pointer;
   }
 </style>

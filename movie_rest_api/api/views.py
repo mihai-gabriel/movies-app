@@ -46,7 +46,7 @@ class UsersViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return [IsAuthenticated(),]
         elif self.action == 'create':
-            return [IsAuthenticated(),]
+            return [AllowAny(),]
         return super(UsersViewSet, self).get_permissions()
 
 

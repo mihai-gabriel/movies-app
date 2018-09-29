@@ -62,7 +62,7 @@ export default {
       const token = window.localStorage.getItem('authtoken');
       return axios({
         method: 'get',
-        url: 'http://localhost:8000/api/users/' + this.id,
+        url: `http://${this.$store.state.domain}/api/users/` + this.id + '/',
         headers: {
           Authorization: `JWT ${token}`
         }

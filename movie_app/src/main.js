@@ -19,7 +19,7 @@ axios.defaults.headers.post['X-CSRFToken'] = window.localStorage.getItem('csrf_t
 router.beforeEach((to, from, next) => {
   // check if the server is available
   axios
-    .get('http://localhost:8000/')
+    .get(`http://${store.state.domain}/`)
     .catch(error => {
       console.log(error);
       Vue.prototype.$toast.open({
@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
   } else {
     // check if jwt token is still available for every request
     axios
-      .post('http://localhost:8000/api/api-token-verify/', {
+      .post(`http://${store.state.domain}/api/api-token-verify/`, {
         token: token
       })
       .then(response => {

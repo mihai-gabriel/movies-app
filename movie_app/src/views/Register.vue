@@ -83,7 +83,7 @@ export default {
       this.isLoading = true;
       return axios({
         method: 'post',
-        url: 'http://localhost:8000/api/users/',
+        url: `http://${this.$store.state.domain}/api/users/`,
         data: {
           username: this.username,
           first_name: this.first_name,

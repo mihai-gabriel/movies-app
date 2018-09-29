@@ -92,7 +92,7 @@ export default {
       // review data
       review_title: '',
       review_text: '',
-      newData: false,
+      newData: 0,
     }
   },
   computed: {
@@ -102,8 +102,8 @@ export default {
   },
   watch: {
     newData(newValue, oldValue) {
+      console.log(oldValue);
       this.fetchMovie();
-      this.newData = oldValue;
     }
   },
   methods: {
@@ -111,7 +111,7 @@ export default {
       this.isLoading = true;
       return axios({
         method: 'get',
-        url: 'http://localhost:8000/api/movies/' + this.id
+        url: `http://${this.$store.state.domain}/api/movies/` + this.id + '/'
       })
         .then(response => {
           this.movie = response.data;
@@ -131,7 +131,7 @@ export default {
       const token = window.localStorage.getItem('authtoken');
       return axios({
         method: 'post',
-        url: 'http://localhost:8000/api/reviews/',
+        url: `http://${this.$store.state.domain}/api/reviews/`,
         data: {
           title: this.review_title,
           movie: this.id,
@@ -145,7 +145,7 @@ export default {
       })
         .then(response => {
           this.isLoading = false;
-          this.newData = true;
+          this.newData++;
           this.review_title = '';
           this.review_text = '';
           console.log(response);

@@ -64,7 +64,7 @@ export default {
       this.isLoading = true;
       return axios({
         method: 'post',
-        url: 'http://localhost:8000/api/api-token-auth/',
+        url: `http://${this.$store.state.domain}/api/api-token-auth/`,
         data: {
           username: this.name,
           password: this.password

@@ -8,7 +8,8 @@ export default new Vuex.Store({
     isAuth: false,
     user: {},
     loginModalActive: false,
-    nextURL: ''
+    nextURL: '',
+    domain: 'localhost:8000'
   },
   mutations: {
     changeAuth(state, val) {

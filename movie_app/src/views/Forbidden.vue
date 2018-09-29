@@ -8,7 +8,11 @@
       <div class="columns is-centered">
         <div class="column is-half">
           <section class="has-text-centered" >
-            <b-icon class="icon-large" icon="security-lock" size="is-large"></b-icon>
+            <b-icon
+              class="only-this icon-large"
+              icon="security-lock"
+              size="is-large"
+            ></b-icon>
             <h1 class="title">Please log in first</h1>
             <h2 class="subtitle">You are not authorized to access {{ path }}</h2>
           </section>
@@ -42,7 +46,7 @@ export default {
     font-size: 140px !important
   }
 
-  .icon-large {
+  .only-this {
     margin-bottom: 4em !important;
   }
 </style>

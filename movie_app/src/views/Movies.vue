@@ -62,7 +62,7 @@ export default {
       this.isLoading = true;
       return axios({
         method: 'get',
-        url: 'http://localhost:8000/api/movies/?page=' + this.current
+        url: `http://${this.$store.state.domain}/api/movies/?page=` + this.current
       })
         .then(response => {
           this.total = response.data.count;
